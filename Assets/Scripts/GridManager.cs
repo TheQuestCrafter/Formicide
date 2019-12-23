@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
             for (int j = 0; j < Utils.Rows; j++)
             {
                 Grid[i, j] = Random.Range(0.0f, 1.0f);
-                SpawnTile(i, j, Grid[i, j]);
+                //SpawnTile(i, j, Grid[i, j]);
             }
         }
     }
@@ -38,9 +38,9 @@ public class GridManager : MonoBehaviour
         //var s = g.AddComponent<SpriteRenderer>();
         //s.sprite = sprites[0];
         //s.color = new Color(value, value, value);
-        SpriteRenderer sr = Instantiate(tilePrefab, Utils.GridToWorldPosition(x, y), Quaternion.identity).GetComponent<SpriteRenderer>();
-        sr.name = "X: " + x + "Y: " + y;
-        sr.sprite = sprites[Utils.GetTile(x, y)];
+        //SpriteRenderer sr = Instantiate(tilePrefab, Utils.GridToWorldPosition(x, y), Quaternion.identity).GetComponent<SpriteRenderer>();
+        //sr.name = "X: " + x + "Y: " + y;
+        //sr.sprite = sprites[Utils.GetTile(x, y)];
 
     }
 
