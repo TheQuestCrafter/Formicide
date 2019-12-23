@@ -45,6 +45,11 @@ public class SettingsManager : MonoBehaviour
 
     private void ApplySound()
     {
+        AudioSource[] soundList = FindObjectsOfType<AudioSource>();
+        foreach( AudioSource sound in soundList)
+        {
+            sound.volume = volume;
+        }
         //In here, there should be made a list of sound sources in a scene and it should lower each of them to the desired volume for each in the list.
     }
 }

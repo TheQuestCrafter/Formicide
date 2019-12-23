@@ -49,10 +49,6 @@ public class MainMenuFunctions : MonoBehaviour
     private void Awake()
     {
         eventSystem = (EventSystem)FindObjectOfType(typeof(EventSystem));
-        fullscreen = (Toggle)FindObjectOfType(typeof(Toggle));
-        volume = (Slider)FindObjectOfType(typeof(Slider));
-        screenSize = (Dropdown)FindObjectOfType(typeof(Dropdown));
-
     }
     private void Start()
     {
@@ -141,6 +137,9 @@ public class MainMenuFunctions : MonoBehaviour
     public void SaveSettings()
     {
         SettingsManager settingsManager = (SettingsManager)FindObjectOfType(typeof(SettingsManager));
+        fullscreen = (Toggle)FindObjectOfType(typeof(Toggle));
+        volume = (Slider)FindObjectOfType(typeof(Slider));
+        screenSize = (Dropdown)FindObjectOfType(typeof(Dropdown));
         settingsManager.fullscreen = fullscreen.isOn;
         settingsManager.volume = volume.value;
         if(screenSize.value == 0)
