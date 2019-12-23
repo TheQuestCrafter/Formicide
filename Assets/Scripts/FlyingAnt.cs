@@ -6,11 +6,11 @@ public class FlyingAnt : Ant
 {
     public FlyingAnt()
     {
-        hitpoints = 15;
-        strength = 5;
-        defense = 3;
-        movement = 3;
-        visionRadius = 3;
+        Hitpoints = 15;
+        Strength = 5;
+        Defense = 3;
+        Movement = 3;
+        VisionRadius = 3;
     }
 
     // Start is called before the first frame update

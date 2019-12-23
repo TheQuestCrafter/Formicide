@@ -6,11 +6,11 @@ public class LightAnt : Ant
 {
     public LightAnt()
     {
-        hitpoints = 10;
-        strength = 4;
-        defense = 4;
-        movement = 2;
-        visionRadius = 2;
+        Hitpoints = 10;
+        Strength = 4;
+        Defense = 4;
+        Movement = 2;
+        VisionRadius = 2;
     }
 
     // Start is called before the first frame update
