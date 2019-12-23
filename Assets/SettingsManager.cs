@@ -17,6 +17,7 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
+        //Right now each time the main menu is started, another will appear, should fix in future update.
         CurrentScene = SceneManager.GetActiveScene();
     }
 
@@ -25,6 +26,7 @@ public class SettingsManager : MonoBehaviour
         CheckSceneMatch();
     }
 
+    //Checks to see if the scene has changed.
     private void CheckSceneMatch()
     {
         if(CurrentScene != SceneManager.GetActiveScene())
@@ -34,9 +36,15 @@ public class SettingsManager : MonoBehaviour
         CurrentScene = SceneManager.GetActiveScene();
     }
 
-    private void ApplySettings()
+    //Applies the resolution and fullscreen settings, sends for sound to be applied to sound sources.
+    public void ApplySettings()
     {
-        Screen.fullScreen = fullscreen;
+        Screen.SetResolution(screenWidth, screenHeight, fullscreen);
+        ApplySound();
+    }
 
+    private void ApplySound()
+    {
+        //In here, there should be made a list of sound sources in a scene and it should lower each of them to the desired volume for each in the list.
     }
 }

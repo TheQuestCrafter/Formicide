@@ -35,6 +35,11 @@ public class MainMenuFunctions : MonoBehaviour
     [SerializeField]
     private GameObject creditsPanel;
 
+    //Grabbing UI Objects which will help us store settings.
+    private Toggle fullscreen;
+    private Slider volume;
+    private Dropdown screenSize;
+
     private EventSystem eventSystem;
     private GameObject activePanelHistory;
     private GameObject currentActivePanel;
@@ -44,7 +49,10 @@ public class MainMenuFunctions : MonoBehaviour
     private void Awake()
     {
         eventSystem = (EventSystem)FindObjectOfType(typeof(EventSystem));
-        
+        fullscreen = (Toggle)FindObjectOfType(typeof(Toggle));
+        volume = (Slider)FindObjectOfType(typeof(Slider));
+        screenSize = (Dropdown)FindObjectOfType(typeof(Dropdown));
+
     }
     private void Start()
     {
@@ -59,6 +67,7 @@ public class MainMenuFunctions : MonoBehaviour
         CheckEventSystem();
     }
 
+    //Checks if the EventSystem is either null or if the active menu is changed, if so then it will prompt further action.
     private void CheckEventSystem()
     {
         if (eventSystem.currentSelectedGameObject == null || activePanelHistory.name != currentActivePanel.name)
@@ -68,6 +77,7 @@ public class MainMenuFunctions : MonoBehaviour
         activePanelHistory = currentActivePanel;
     }
 
+    //Checks which panel is currently active and changes the currently active panel so it can be compared to the history.
     private void CheckActivePanel()
     {
         if (mainMenuPanel.activeInHierarchy)
@@ -92,17 +102,20 @@ public class MainMenuFunctions : MonoBehaviour
         }
     }
 
+    //Takes input scene number and unloads this scene and loads a new one.
     public void GoToScene(int sceneNum)
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.LoadScene(sceneNum);
     }
 
+    //Quits the game
     public void EndGame()
     {
         Application.Quit();
     }
 
+    //Called if the event system needs to detect that a new submenu is opened so it resets the currently selected GameObject
     private void UpdateEventSystem()
     {
         GameObject newSelected;
@@ -122,5 +135,29 @@ public class MainMenuFunctions : MonoBehaviour
                 break;
         }
         eventSystem.SetSelectedGameObject(newSelected);
+    }
+    
+    //Finds the settings manager in the scene and takes the player input and sends that data to the manager.
+    public void SaveSettings()
+    {
+        SettingsManager settingsManager = (SettingsManager)FindObjectOfType(typeof(SettingsManager));
+        settingsManager.fullscreen = fullscreen.isOn;
+        settingsManager.volume = volume.value;
+        if(screenSize.value == 0)
+        {
+            settingsManager.screenWidth = 1920;
+            settingsManager.screenHeight = 1080;
+        }
+        else if(screenSize.value == 1)
+        {
+            settingsManager.screenWidth = 1366;
+            settingsManager.screenHeight = 768;
+        }
+        else if(screenSize.value == 2)
+        {
+            settingsManager.screenWidth = 1600;
+            settingsManager.screenHeight = 900;
+        }
+        settingsManager.ApplySettings();
     }
 }
