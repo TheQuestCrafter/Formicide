@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public GameObject tilePrefab;
-    public Sprite[] sprites;
+    public TileThemeObject[] themes;
     public float[,] Grid;
 
     // Start is called before the first frame update
