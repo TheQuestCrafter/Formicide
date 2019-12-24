@@ -46,6 +46,9 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
 
     public int CalculateDamage(int damage)
     {
+        // Strength + [(Weapon might + Weapon triangle bonus) x Effective bonus] + Support bonus
+        // Defense + Support bonus + Terrain bonus
+        // Damage	= (Attack – enemy Defense) x Critical bonus
         Debug.Log("You made it to CalculateDamage()!");
         return 1;
     }

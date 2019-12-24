@@ -151,8 +151,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 3240988986061292655, guid: 902259ae030cbfe45b248111c4e1b3e5,
     type: 3}
-  sprites:
-  - {fileID: 21300000, guid: 5ae7becfe17c8fc4e9989ea2da7eab6d, type: 3}
+  themes:
+  - {fileID: 11400000, guid: 81d644c5a40007447a6a95927972e5f5, type: 2}
+  currentTheme: 0
 --- !u!4 &1581131155
 Transform:
   m_ObjectHideFlags: 0

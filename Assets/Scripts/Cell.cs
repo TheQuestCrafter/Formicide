@@ -18,7 +18,7 @@ public struct Cell
         renderer.sprite = sprite;
     }
 
-    public void UpdateTile( Sprite sprite)
+    public void UpdateTile(Sprite sprite)
     {
         renderer.sprite = sprite;
     }
