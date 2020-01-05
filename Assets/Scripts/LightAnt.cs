@@ -16,7 +16,7 @@ public class LightAnt : Ant
     // Start is called before the first frame update
     void Start()
     {
-
+        SetAntPositionToGrid();
     }
 
     

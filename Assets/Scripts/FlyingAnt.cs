@@ -16,7 +16,7 @@ public class FlyingAnt : Ant
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetAntPositionToGrid();
     }
 
     // Update is called once per frame
