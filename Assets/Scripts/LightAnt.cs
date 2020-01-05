@@ -16,12 +16,23 @@ public class LightAnt : Ant
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
+    
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    this.gameObject.transform.position = other.gameObject.transform.position;
+    //}
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    this.gameObject.transform.position= collision.gameObject.transform.position;
+    //}
 }

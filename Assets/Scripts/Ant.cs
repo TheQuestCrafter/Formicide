@@ -20,7 +20,7 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
     // Start is called before the first frame update
     void Start()
     {
-
+        SetAntPositionToGrid();
     }
 
     // Update is called once per frame
@@ -28,6 +28,51 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
     {
         
     }
+
+    protected void SetAntPositionToGrid()
+    {
+        float xCoord = this.gameObject.transform.position.x;
+        float xRemainder = xCoord % 0.5f;
+
+        float yCoord = this.gameObject.transform.position.y;
+        float yRemainder = yCoord % 0.5f;
+
+        xCoord = AlignToGrid(xCoord, xRemainder);
+        yCoord = AlignToGrid(yCoord, yRemainder);
+
+        this.gameObject.transform.position = new Vector3(xCoord, yCoord);
+    }
+
+    protected float AlignToGrid(float Coord, float Remainder)
+    {
+        if (Remainder < 0.5f && Remainder > 0)
+        {
+            Coord -= Remainder;
+            Coord += 0.5f;
+        }
+        else if (Remainder > -0.5f && Remainder < 0)
+        {
+            Coord -= Remainder;
+            Coord -= 0.5f;
+        }
+        else
+        {
+            Coord -= Remainder;
+        }
+
+        if (Coord % 1f == 0)
+        {
+            if (Remainder != 0)
+            {
+                if (Remainder > 0)
+                    Coord = 0.5f;
+                else
+                    Coord = -0.5f;
+            }
+        }
+        return Coord;
+    }
+
 
     public void MoveUnit()
     {
