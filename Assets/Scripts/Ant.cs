@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
 {
+    public Location CurrentLocation;
+    public int x;
+    public int y;
     public int Strength { get; set; }
     public int Defense { get; set; }
     public int Hitpoints { get; set; }
@@ -11,6 +14,8 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
     public int Movement { get; set; }
     public int VisionRadius { get; set; }
     public IWeapon EquippedWeapon { get; set; }
+    public Ray ray;
+    public RaycastHit hit;
 
     public Ant()
     {
@@ -41,6 +46,11 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
         yCoord = AlignToGrid(yCoord, yRemainder);
 
         this.gameObject.transform.position = new Vector3(xCoord, yCoord);
+
+        if( Physics.Raycast(transform.position, Vector3.forward, out hit ))
+        {
+            CurrentLocation = hit.rigidbody.gameObject.GetComponent<Location>();
+        }
     }
 
     protected float AlignToGrid(float Coord, float Remainder)
@@ -73,6 +83,39 @@ public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
         return Coord;
     }
 
+    public void GetTileCoordinates()
+    {
+
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnMouseOver()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+
+        }
+    }
 
     public void MoveUnit()
     {

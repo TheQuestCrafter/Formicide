@@ -8,10 +8,12 @@ public class GridManager : MonoBehaviour
     public TileThemeObject[] themes;
     public int currentTheme;
     public Cell[,] Grid;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        Utils.GridManagerObject = this.gameObject;
         SetupGrid();
     }
 
@@ -64,4 +66,5 @@ public class GridManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             UpdateTileTheme(currentTheme < themes.Length - 1 ? currentTheme += 1 : 0);
     }
+    
 }
