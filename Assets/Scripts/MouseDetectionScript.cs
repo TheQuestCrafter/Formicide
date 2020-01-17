@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingAnt : Ant
+public class MouseDetectionScript : MonoBehaviour
 {
-    public FlyingAnt()
-    {
-        Hitpoints = 15;
-        Strength = 5;
-        Defense = 3;
-        Movement = 3;
-        VisionRadius = 3;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        SetAntPositionToGrid();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void OnMouseEnter()
+    {
+        Utils.MouseLocation = this.gameObject;
     }
 }

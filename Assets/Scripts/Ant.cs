@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ant : MonoBehaviour, IDamageable
+public abstract class Ant : MonoBehaviour, IDamageable, ICharacter
 {
-    public int movement, strength, defense, hitpoints, visionRadius;
+    public Location CurrentLocation;
+    public int x;
+    public int y;
+    public int Strength { get; set; }
+    public int Defense { get; set; }
+    public int Hitpoints { get; set; }
+    public Ant Target { get; set; }
+    public int Movement { get; set; }
+    public int VisionRadius { get; set; }
+    public IWeapon EquippedWeapon { get; set; }
+    public Ray ray;
+    public RaycastHit hit;
 
     public Ant()
     {
-        movement = strength = defense = hitpoints = visionRadius = 0;
+        Movement = Strength = Defense = Hitpoints = VisionRadius = 5;
     }
 
     // Start is called before the first frame update
@@ -21,5 +32,118 @@ public abstract class Ant : MonoBehaviour, IDamageable
     void Update()
     {
         
+    }
+
+    protected void SetAntPositionToGrid()
+    {
+        float xCoord = this.gameObject.transform.position.x;
+        float xRemainder = xCoord % 0.5f;
+
+        float yCoord = this.gameObject.transform.position.y;
+        float yRemainder = yCoord % 0.5f;
+
+        xCoord = AlignToGrid(xCoord, xRemainder);
+        yCoord = AlignToGrid(yCoord, yRemainder);
+
+        this.gameObject.transform.position = new Vector3(xCoord, yCoord);
+
+        if( Physics.Raycast(transform.position, Vector3.forward, out hit ))
+        {
+            CurrentLocation = hit.rigidbody.gameObject.GetComponent<Location>();
+        }
+    }
+
+    protected float AlignToGrid(float Coord, float Remainder)
+    {
+        if (Remainder < 0.5f && Remainder > 0)
+        {
+            Coord -= Remainder;
+            Coord += 0.5f;
+        }
+        else if (Remainder > -0.5f && Remainder < 0)
+        {
+            Coord -= Remainder;
+            Coord -= 0.5f;
+        }
+        else
+        {
+            Coord -= Remainder;
+        }
+
+        if (Coord % 1f == 0)
+        {
+            if (Remainder != 0)
+            {
+                if (Remainder > 0)
+                    Coord = 0.5f;
+                else
+                    Coord = -0.5f;
+            }
+        }
+        return Coord;
+    }
+
+    public void GetTileCoordinates()
+    {
+
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        CurrentLocation = collision.gameObject.GetComponent<Location>();
+        x = CurrentLocation.XCoordinate;
+        y = CurrentLocation.YCoordinate;
+    }
+
+    public void OnMouseOver()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+
+        }
+    }
+
+    public void MoveUnit()
+    {
+
+    }
+
+    public void Attack()
+    {
+        this.UseWeapon(Target);
+    }
+
+    public string UseWeapon(IDamageable other)
+    {
+        return this.EquippedWeapon.Use(Target) + "\n " + other.TakeDamage(this.CalculateDamage(this.EquippedWeapon.WeaponDamage));
+    }
+
+    public int CalculateDamage(int damage)
+    {
+        // Strength + [(Weapon might + Weapon triangle bonus) x Effective bonus] + Support bonus
+        // Defense + Support bonus + Terrain bonus
+        // Damage	= (Attack – enemy Defense) x Critical bonus
+        Debug.Log("You made it to CalculateDamage()!");
+        return 1;
+    }
+
+    public string TakeDamage(int damage)
+    {
+        Debug.Log("You made it to TakeDamage()");
+        return "1";
     }
 }

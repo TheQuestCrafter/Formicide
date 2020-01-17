@@ -12,14 +12,18 @@ public struct Cell
     {
         X = x;
         Y = y;
-        gameObject = GameObject.Instantiate(prefab, Utils.GridToWorldPosition(x, y), Quaternion.identity);
+        gameObject = GameObject.Instantiate(prefab, Utils.GridToWorldPosition(x, y), Quaternion.identity, Utils.GridManagerObject.transform);
+        gameObject.GetComponent<Location>().XCoordinate = x;
+        gameObject.GetComponent<Location>().YCoordinate = y;
         renderer = gameObject.GetComponent<SpriteRenderer>();
         gameObject.name = "X: " + x + "Y: " + y;
         renderer.sprite = sprite;
     }
 
-    public void UpdateTile( Sprite sprite)
+    public void UpdateTile(Sprite sprite)
     {
         renderer.sprite = sprite;
     }
+
+    
 }

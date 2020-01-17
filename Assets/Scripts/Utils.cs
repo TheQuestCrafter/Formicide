@@ -5,6 +5,8 @@ using UnityEngine;
 public static class Utils
 {
     public static int Vertical, Horizontal, Columns, Rows;
+    public static GameObject GridManagerObject;
+    public static GameObject MouseLocation;
 
     public static Vector3 GridToWorldPosition(int x, int y)
     {

@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingAnt : Ant
+public class GameManagerScript : MonoBehaviour
 {
-    public FlyingAnt()
-    {
-        Hitpoints = 15;
-        Strength = 5;
-        Defense = 3;
-        Movement = 3;
-        VisionRadius = 3;
-    }
-
+    public List<Ant> PlayerAnts;
+    public GameObject SelectedUnit;
     // Start is called before the first frame update
     void Start()
     {
-        SetAntPositionToGrid();
+        PlayerAnts = new List<Ant>();
     }
 
     // Update is called once per frame
